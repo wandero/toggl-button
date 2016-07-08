@@ -1401,27 +1401,37 @@ TogglButton = {
     if (changeInfo.status === "complete") {
       var domain = TogglButton.extractDomain(tab.url),
         permission = {origins: domain.origins};
-      console.log("url: " + tab.url + " | domain-file: " + domain.file);
       if (FF) {
         if (!!domain.file) {
-          chrome.tabs.insertCSS(tabId, {file: "styles/style.css"});
-          chrome.tabs.executeScript(tabId, {file: "scripts/common.js"}, function () {
-            chrome.tabs.executeScript(tabId, {file: "scripts/content/" + domain.file});
-          });
+          TogglButton.checkLoadedScripts(tabId, domain.file);
         }
       } else {
         chrome.permissions.contains(permission, function (result) {
           if (result) {
             if (!!domain.file) {
-              chrome.tabs.insertCSS(tabId, {file: "styles/style.css"});
-              chrome.tabs.executeScript(tabId, {file: "scripts/common.js"}, function () {
-                chrome.tabs.executeScript(tabId, {file: "scripts/content/" + domain.file});
-              });
+              TogglButton.checkLoadedScripts(tabId, domain.file);
             }
           }
         });
       }
     }
+  },
+
+  checkLoadedScripts: function (tabId, file) {
+    chrome.tabs.executeScript(tabId, {
+      "code": "(typeof togglbutton === 'undefined')"
+    }, function (firstLoad) {
+      if (!!firstLoad[0]) {
+        TogglButton.executeScripts(tabId, file);
+      }
+    });
+  },
+
+  executeScripts: function (tabId, file) {
+    chrome.tabs.insertCSS(tabId, {file: "styles/style.css"});
+    chrome.tabs.executeScript(tabId, {file: "scripts/common.js"}, function () {
+      chrome.tabs.executeScript(tabId, {file: "scripts/content/" + file});
+    });
   },
 
   extractDomain: function (url) {
