@@ -34,10 +34,6 @@
     "url": "*://*.axosoft.com/*",
     "name": "Axosoft"
   },
-  "backlog.jp": {
-    "url": "*://*.backlog.jp/*",
-    "name": "Backlog"
-  },
   "basecamp.com": {
     "url": "*://*.basecamp.com/*",
     "name": "Basecamp"
@@ -275,10 +271,6 @@
     "url": "*://*.podio.com/*",
     "name": "Podio"
   },
-  "processwire": {
-    "url": "",
-    "name": "ProcessWire"
-  },
   "producteev.com": {
     "url": "*://*.producteev.com/*",
     "name": "Producteev"
@@ -329,11 +321,11 @@
     "name": "Rindle"
   },
   "salesforce.com": {
-    "url": "*://*.salesforce.com/*,*://*.my.salesforce.com/*",
+    "url": "*://*.salesforce.com/*",
     "name": "Salesforce"
   },
   "force.com": {
-    "url": "*://*.force.com/*,*://*.lightning.force.com/*",
+    "url": "*://*.force.com/*",
     "name": "Salesforce Lightning",
     "file": "salesforce.js"
   },
@@ -501,5 +493,9 @@
   "teamleader.eu": {
     "url": "*://app.teamleader.eu/*",
     "name": "Teamleader"
+  },
+  "workflowy.com": {
+    "url": "*://workflowy.com/*",
+    "name": "WorkFlowy"
   }
 }
